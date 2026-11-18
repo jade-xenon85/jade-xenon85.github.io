@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>踩踏-事故还原与人群安全观察</title>
+<meta name="description" content="踩踏事故还原与人群安全观察站，梳理大型集会踩踏的成因链、现场复盘、疏散规则与自保动作，含真实案例时间线、人群密度数据、FAQ 与观众留言，帮助读者判断风险环节。">
+<meta name="keywords" content="踩踏">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a2a3a'/%3E%3Cpath d='M12 44 L24 24 L34 40 L44 20 L54 44' fill='none' stroke='%23f0a63c' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='52' r='4' fill='%23e6eef5'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"踩踏","description":"大型集会踩踏事故还原与人群安全观察","inLanguage":"zh-CN"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"人群密度到多少会开始出现踩踏风险？","acceptedAnswer":{"@type":"Answer","text":"按英国 Health and Safety Executive 的通行分级，每平方米超过4人时个体已无法自主选择行走方向，超过6人时胸腔受挤压、呼吸受限，通常把4人/㎡视为需要立即限流的警戒线。"}},
+{"@type":"Question","name":"踩踏中倒地后应该怎么保护自己？","acceptedAnswer":{"@type":"Answer","text":"侧卧蜷缩、双手护住后颈与头部、双膝收向胸口，尽量让背部朝向人流推进方向，减少胸腔被直接压迫；同时寻找护栏立柱、台阶侧壁等可攀附的固定物。"}},
+{"@type":"Question","name":"演唱会站区前排为什么比看台更危险？","acceptedAnswer":{"@type":"Answer","text":"站区没有固定座椅分隔，人群密度随演出高潮短时间上升，且退场时同一通道被双向使用；看台有阶梯和座椅形成物理阻隔，密度峰值通常低于站区。"}},
+{"@type":"Question","name":"遇到人群对冲时逆流退回是否可行？","acceptedAnswer":{"@type":"Answer","text":"在密度低于3人/㎡时可以小步侧移退出；密度更高时逆流会制造新的对冲面，更稳妥的做法是顺流斜向移动，靠近边缘的固定物再脱离主流动线。"}},
+{"@type":"Question","name":"大型活动限流通知一般提前多久发布？","acceptedAnswer":{"@type":"Answer","text":"国内多数场馆在开票后随票务页面公布分区容量，临时限流则通过主办方微博、场馆广播在开场前1至2小时发布，具体以现场公告为准。"}}
+]}
+</script>
+<style>
+:root{
+  --ink:#1a2a3a;
+  --ink-2:#2f4356;
+  --paper:#f4f1ea;
+  --card:#fffdf8;
+  --line:#d8d2c4;
+  --accent:#c8452b;
+  --accent-2:#f0a63c;
+  --muted:#6b7785;
+  --ok:#2f7a5c;
+  --radius:10px;
+  --shadow:0 2px 0 rgba(26,42,58,.08),0 8px 24px rgba(26,42,58,.07);
+  --space:clamp(16px,2.2vw,28px);
+  --sticky-h:96px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,"Microsoft YaHei",serif;
+  line-height:1.75;
+  font-size:16px;
+}
+h1,h2,h3,h4{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.35;margin:0 0 .5em}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--accent)}
+img{max-width:100%;display:block;object-fit:cover}
+ul,ol{margin:.4em 0;padding-left:1.3em}
+p{margin:.55em 0}
+:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px;border-radius:4px}
+section[id],div[id]{scroll-margin-top:calc(var(--sticky-h) + 8px)}
+
+/* 公告 + 页头 */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:var(--ink);color:#e9eef4;
+  font-size:13px;letter-spacing:.02em;
+}
+.topbar .wrap{display:flex;gap:12px;align-items:center;padding:7px var(--space);flex-wrap:wrap}
+.topbar b{color:var(--accent-2);font-weight:600}
+.topbar .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block;margin-right:6px}
+.siteheader{
+  position:sticky;top:34px;z-index:55;
+  background:rgba(244,241,234,.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.headrow{
+  display:flex;align-items:center;gap:18px;
+  padding:10px var(--space);
+  max-width:1200px;margin:0 auto;
+  flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;font-family:"Noto Sans SC",sans-serif}
+.brand svg{width:34px;height:34px;flex:0 0 auto}
+nav.mainnav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav.mainnav a{padding:6px 10px;border-radius:8px;font-size:14px;font-family:"Noto Sans SC",sans-serif}
+nav.mainnav a:hover,nav.mainnav a.active{background:#e6dfd0}
+.headtools{display:flex;gap:8px;align-items:center}
+.searchbox{display:flex;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:2px 4px}
+.searchbox input{border:0;background:transparent;padding:5px 6px;width:130px;font:inherit;font-size:14px;color:var(--ink)}
+.searchbox input:focus{outline:none}
+.searchbox button{border:0;background:var(--ink);color:#fff;border-radius:6px;padding:5px 10px;font-size:13px;cursor:pointer;font-family:inherit}
+.menubtn{display:none;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+.searchmsg{font-size:12px;color:var(--accent);min-height:16px;padding:0 var(--space) 4px;max-width:1200px;margin:0 auto}
+
+/* 首屏 */
+.hero{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(160deg,#1a2a3a 0%,#24384b 58%,#2f4356 100%);
+  color:#f2f5f8;
+}
+.hero .inner{max-width:1200px;margin:0 auto;padding:clamp(28px,5vw,64px) var(--space);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(18px,3vw,44px);align-items:center}
+.hero h1{font-size:clamp(38px,7vw,68px);letter-spacing:.04em;margin:0}
+.hero .kick{display:inline-block;font-size:12px;letter-spacing:.3em;color:var(--accent-2);border:1px solid rgba(240,166,60,.5);padding:3px 10px;border-radius:99px;margin-bottom:14px}
+.hero p.lead{font-size:16px;color:#cdd8e2;max-width:34em;margin:14px 0 20px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 20px;border-radius:8px;font-family:"Noto Sans SC",sans-serif;font-size:15px;border:1px solid transparent;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-main{background:var(--accent-2);color:#231808;font-weight:600}
+.btn-ghost{border-color:rgba(255,255,255,.45);color:#fff}
+.heroart{width:100%;height:auto}
+.hero .stats{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.hero .stats div{font-family:"Noto Sans SC",sans-serif}
+.hero .stats b{display:block;font-size:24px;color:var(--accent-2)}
+.hero .stats span{font-size:12.5px;color:#b9c6d2;letter-spacing:.05em}
+
+/* 布局 */
+.layout{max-width:1200px;margin:0 auto;padding:var(--space);display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:clamp(20px,3vw,40px);align-items:start}
+main{min-width:0}
+aside{position:sticky;top:calc(var(--sticky-h) + 12px)}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;order:2}
+  .hero .inner{grid-template-columns:1fr}
+  .heroart{max-width:340px}
+  nav.mainnav{display:none;width:100%;margin:0;border-top:1px solid var(--line);padding-top:8px}
+  nav.mainnav.open{display:flex}
+  .menubtn{display:inline-block;margin-left:auto}
+}
+@media(max-width:600px){
+  .hero .inner{padding-top:24px}
+  .topbar .wrap{font-size:12px}
+}
+
+/* 通用板块 */
+.block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(16px,2.4vw,28px);margin-bottom:var(--space);box-shadow:var(--shadow)}
+.block > h2{font-size:clamp(20px,2.6vw,26px);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.block > h2 .num{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+.sec-note{font-size:13.5px;color:var(--muted);margin:-2px 0 12px}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:#ece6d9;color:var(--ink-2);margin:2px 4px 2px 0;font-family:"Noto Sans SC",sans-serif}
+.tag.hot{background:#fbe3d6;color:#8f2d16}
+.meta{font-size:12.5px;color:var(--muted);font-family:"Noto Sans SC",sans-serif}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){.g3,.g2{grid-template-columns:1fr}}
+article.card{border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:6px}
+article.card h3{font-size:16px;margin:0}
+article.card p{margin:0;font-size:14px;color:var(--ink-2)}
+article.card .meta{margin-top:auto}
+ul.rows{list-style:none;padding:0;margin:0}
+ul.rows li{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+ul.rows li:last-child{border-bottom:0}
+ul.rows .date{font-family:"Noto Sans SC",sans-serif;font-size:12.5px;color:var(--accent);flex:0 0 62px}
+ul.rows .t{font-size:14.5px}
+ul.rows .t a{font-weight:600}
+
+/* 分类索引 */
+.tagsindex{display:flex;flex-wrap:wrap;gap:8px}
+.tagsindex a{border:1px solid var(--line);border-radius:99px;padding:5px 13px;font-size:13.5px;background:#fff;font-family:"Noto Sans SC",sans-serif}
+.tagsindex a b{font-weight:600;color:var(--accent);font-size:12px;margin-left:4px}
+
+/* 深度解析 */
+.deep{border-left:4px solid var(--accent);background:linear-gradient(180deg,#fffdf8,#fbf8f0)}
+.deep h3{font-size:17.5px;margin-top:1.2em;padding-left:10px;border-left:3px solid var(--accent-2)}
+.deep p{font-size:15.5px}
+.quote{border:1px solid var(--line);background:#f6f2e7;border-radius:8px;padding:14px 16px;font-size:15px;color:var(--ink-2);margin:14px 0}
+.quote cite{display:block;font-size:12.5px;color:var(--muted);font-style:normal;margin-top:6px;font-family:"Noto Sans SC",sans-serif}
+
+/* 对照面板 */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.vs > div{padding:14px}
+.vs > div:first-child{background:#f3ece0;border-right:1px solid var(--line)}
+.vs > div:last-child{background:#eef3f1}
+.vs h4{margin:0 0 6px;font-size:14.5px}
+.vs ul{margin:0;padding-left:1.1em;font-size:14px}
+@media(max-width:600px){.vs{grid-template-columns:1fr}.vs > div:first-child{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* 步骤 */
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ol.steps li{counter-increment:s;padding:10px 12px 10px 48px;position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;font-size:14.5px}
+ol.steps li::before{content:counter(s);position:absolute;left:12px;top:10px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;display:grid;place-items:center;font-family:"Noto Sans SC",sans-serif}
+
+/* FAQ */
+details.faq{border:1px solid var(--line);border-radius:8px;background:#fff;margin-bottom:8px;padding:0 12px}
+details.faq summary{cursor:pointer;padding:11px 0;font-weight:600;font-size:14.5px;font-family:"Noto Sans SC",sans-serif;list-style:none}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::before{content:"＋";color:var(--accent);margin-right:8px;font-weight:700}
+details.faq[open] summary::before{content:"－"}
+details.faq p{font-size:14px;color:var(--ink-2);padding-bottom:10px;margin:0}
+
+/* 评论 */
+.cmts{display:grid;gap:10px}
+.cmt{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fff;font-size:14px}
+.cmt .who{font-family:"Noto Sans SC",sans-serif;font-size:12.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+.cmt .who b{color:var(--ink)}
+.cmt p{margin:4px 0 0}
+
+/* 侧栏 */
+aside .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px;box-shadow:var(--shadow)}
+aside .panel h2{font-size:15px;letter-spacing:.08em;font-family:"Noto Sans SC",sans-serif;color:var(--ink-2)}
+aside .panel nav{display:flex;flex-direction:column;gap:2px}
+aside .panel nav a{font-size:13.5px;padding:6px 8px;border-radius:6px;border-left:3px solid transparent}
+aside .panel nav a.hl{background:#efe9db;border-left-color:var(--accent);color:var(--ink);font-weight:600}
+aside .panel ul{padding-left:1.1em;margin:0;font-size:13.5px}
+aside .panel li{margin:4px 0}
+.timeline{list-style:none;padding:0;margin:0;font-size:13.5px}
+.timeline li{padding:0 0 10px 16px;border-left:2px solid var(--line);position:relative;margin-left:4px}
+.timeline li::before{content:"";position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent-2)}
+.timeline b{font-family:"Noto Sans SC",sans-serif;font-size:12.5px;color:var(--accent);display:block}
+
+/* 页尾 */
+footer.sitefoot{background:var(--ink);color:#c8d3de;margin-top:var(--space);padding:clamp(24px,4vw,44px) var(--space) 28px}
+.footgrid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+@media(max-width:820px){.footgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.footgrid{grid-template-columns:1fr}}
+footer.sitefoot h3{font-size:13px;letter-spacing:.14em;color:#e9eef4;margin-bottom:8px}
+footer.sitefoot a{color:#b9c6d2;font-size:13.5px;display:block;padding:2px 0}
+footer.sitefoot a:hover{color:var(--accent-2)}
+.footbrand{display:flex;align-items:center;gap:9px;font-size:19px;color:#fff;font-family:"Noto Sans SC",sans-serif;font-weight:700}
+.footbrand svg{width:30px;height:30px}
+.local{font-size:13px;color:#93a3b3;margin:8px 0 0}
+.copyright{max-width:1200px;margin:22px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;color:#8697a7;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* 回到顶部 */
+#toTop{position:fixed;right:18px;bottom:18px;z-index:70;border:0;background:var(--accent);color:#fff;width:44px;height:44px;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s;box-shadow:0 6px 18px rgba(200,69,43,.35)}
+#toTop.show{opacity:1;pointer-events:auto}
+@media(max-width:600px){#toTop{right:12px;bottom:12px;width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .btn:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span><span class="dot"></span><b>踩踏</b> 观察台 · 11月7日更新：虹口体育馆站区限流阈值调整为 4 人/㎡，退场改三向分流</span>
+  </div>
+</div>
+
+<header class="siteheader">
+  <div class="headrow">
+    <a class="brand" href="/#top" aria-label="踩踏 首页">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1a2a3a"/>
+        <path d="M12 44 L24 24 L34 40 L44 20 L54 44" fill="none" stroke="#f0a63c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="32" cy="52" r="4" fill="#e6eef5"/>
+      </svg>
+      踩踏
+    </a>
+    <button class="menubtn" id="menuBtn" aria-expanded="false" aria-controls="mainnav">栏目菜单</button>
+    <nav class="mainnav" id="mainnav" aria-label="主题导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#picks">精选内容</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#cats">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#talks">观众留言</a>
+    </nav>
+    <div class="headtools">
+      <div class="searchbox">
+        <input id="q" type="search" placeholder="查案例/规则" aria-label="站内搜索">
+        <button id="qbtn" type="button">查找</button>
+      </div>
+    </div>
+  </div>
+  <p class="searchmsg" id="searchMsg" role="status" aria-live="polite"></p>
+</header>
+
+<div id="top"></div>
+
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="inner">
+    <div>
+      <span class="kick">人群密度 · 事故复盘</span>
+      <h1 id="heroTitle">踩踏</h1>
+      <p class="lead">把大型集会里挤压伤亡的成因链拆开看：入口瓶颈、退场对冲、坡道与门槛的落差、广播延迟。每条结论都尽量落到某场活动、某个时间点、某一组密度数字上。</p>
+      <div class="cta">
+        <a class="btn btn-main" href="/#deep">读深度解析</a>
+        <a class="btn btn-ghost" href="/#guide">看自保动作</a>
+      </div>
+      <div class="stats">
+        <div><b>6</b><span>起案例时间线</span></div>
+        <div><b>4 人/㎡</b><span>限流警戒线</span></div>
+        <div><b>11</b><span>个观察板块</span></div>
+      </div>
+    </div>
+    <svg class="heroart" viewBox="0 0 360 300" role="img" aria-label="人群向窄口汇流的示意图，箭头标示压力方向">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f0a63c" stop-opacity=".9"/>
+          <stop offset="1" stop-color="#c8452b" stop-opacity=".85"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="360" height="300" fill="none"/>
+      <path d="M20 40 Q180 60 340 40" stroke="#3d556b" stroke-width="2" fill="none"/>
+      <path d="M20 260 Q180 240 340 260" stroke="#3d556b" stroke-width="2" fill="none"/>
+      <path d="M150 70 L150 230" stroke="#f0a63c" stroke-width="3" stroke-dasharray="8 7"/>
+      <path d="M210 70 L210 230" stroke="#f0a63c" stroke-width="3" stroke-dasharray="8 7"/>
+      <g fill="#e6eef5" opacity=".85">
+        <circle cx="60" cy="120" r="9"/><circle cx="95" cy="96" r="9"/><circle cx="88" cy="150" r="9"/>
+        <circle cx="120" cy="200" r="9"/><circle cx="70" cy="212" r="9"/><circle cx="128" cy="118" r="9"/>
+        <circle cx="280" cy="110" r="9"/><circle cx="305" cy="160" r="9"/><circle cx="262" cy="196" r="9"/>
+        <circle cx="300" cy="220" r="9"/><circle cx="246" cy="132" r="9"/><circle cx="272" cy="72" r="9"/>
+      </g>
+      <g fill="none" stroke="url(#g1)" stroke-width="4" stroke-linecap="round">
+        <path d="M132 118 L166 118"/><path d="M132 200 L166 200"/>
+        <path d="M194 118 L228 118"/><path d="M194 200 L228 200"/>
+      </g>
+      <circle cx="180" cy="159" r="26" fill="none" stroke="#c8452b" stroke-width="3"/>
+      <text x="180" y="165" text-anchor="middle" font-size="12" fill="#f0a63c" font-family="sans-serif">瓶颈</text>
+    </svg>
+  </div>
+</section>
+
+<div class="layout">
+<main>
+
+  <!-- 1 领域概览 -->
+  <section class="block" id="overview" aria-labelledby="h-overview">
+    <h2 id="h-overview"><span class="num">01</span>领域概览：人群挤压伤发生在哪几个环节</h2>
+    <p class="sec-note">按事故现场结构拆成五类，每类附常见触发条件。</p>
+    <p>大型活动的人身伤害多数不是被“踩”出来的。法医学上，密闭人群中的死亡主因是创伤性窒息：胸腔被前后夹住，膈肌无法下降，三五分钟内即出现缺氧。上海外滩2014年12月31日事件的官方调查报告中，遇难者伤情描述集中在胸部受压，与踩踏动作关联有限。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <article class="card">
+        <h3>入口瓶颈型</h3>
+        <p>安检口、闸机、楼梯口由宽变窄。人流在收缩处形成拱形滞留，外侧的人被推向中心。</p>
+        <span class="meta">典型：体育场检票口</span>
+      </article>
+      <article class="card">
+        <h3>退场对冲型</h3>
+        <p>散场时一部分人回身找同伴、找卫生间，与主流动线交叉，形成对冲面。</p>
+        <span class="meta">典型：音乐节散场</span>
+      </article>
+      <article class="card">
+        <h3>坡道门槛型</h3>
+        <p>台阶、地槛、排水沟盖板造成微小高差，队伍在此减速，后方压力叠加。</p>
+        <span class="meta">典型：天桥与地下通道</span>
+      </article>
+      <article class="card">
+        <h3>情绪驱动型</h3>
+        <p>演出高潮、限量发售、突发声响引发短时冲挤，密度在几十秒内跃升。</p>
+        <span class="meta">典型：站区前排</span>
+      </article>
+      <article class="card">
+        <h3>信息缺失型</h3>
+        <p>广播不清、出口无标识，人群自行判断方向，形成局部涡流。</p>
+        <span class="meta">典型：临时搭建场地</span>
+      </article>
+      <article class="card">
+        <h3>倒地连锁型</h3>
+        <p>一人跌倒后形成“绊点”，后方来不及反应，三到五秒叠压数层。</p>
+        <span class="meta">典型：夜间昏暗通道</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- 2 精选内容推荐 -->
+  <section class="block" id="picks" aria-labelledby="h-picks">
+    <h2 id="h-picks"><span class="num">02</span>精选内容：五份可逐条核对的现场复盘</h2>
+    <p class="sec-note">优先选有官方调查结论或监控时间戳的案例。</p>
+    <div class="grid g2">
+      <article class="card">
+        <h3>虹口体育馆11月7日站区限流复盘</h3>
+        <p>开场前18分钟，A2闸机外密度被现场安保用计数法测到 4.6 人/㎡，随即关闭该口并启用B通道。退场改为三向分流后，单口通过量从每分钟 210 人升至 340 人。</p>
+        <span class="meta">11月7日 · 现场记录</span>
+      </article>
+      <article class="card">
+        <h3>首尔梨泰院2022年10月29日巷道挤压</h3>
+        <p>宽约3.2米的斜坡巷道，双向人流在长约40米区间交汇。韩国警方事后公布的112报警记录显示，挤压高峰前已接到十余通“快被压死”的求助。</p>
+        <span class="meta">案例复盘 · 巷道结构</span>
+      </article>
+      <article class="card">
+        <h3>麦加米纳2015年9月24日朝觐通道</h3>
+        <p>两条朝觐路线在交叉口汇合，官方统计遇难者逾七百人。事后整改措施包括把交叉口改为单向循环、增设立体天桥。</p>
+        <span class="meta">案例复盘 · 交叉口</span>
+      </article>
+      <article class="card">
+        <h3>音乐节站区前排的密度峰值曲线</h3>
+        <p>某户外电子音乐节在主场压轴时段，前排护栏前3米处测得 5.1 人/㎡，台侧退场口同步开放后十分钟内降至 2.7 人/㎡。</p>
+        <span class="meta">数据 · 站区密度</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3 最新更新 -->
+  <section class="block" id="latest" aria-labelledby="h-latest">
+    <h2 id="h-latest"><span class="num">03</span>最新更新：本周规则与公告变动</h2>
+    <ul class="rows">
+      <li><span class="date">今天 09:20</span><span class="t"><a href="/#deep">虹口体育馆把站区限流阈值写进票务页，明确 4 人/㎡ 触发封闭</a> · 公告同步到三处入口屏</span></li>
+      <li><span class="date">11月6日</span><span class="t"><a href="/#cats">地铁2号线人民广场站B口晚间封站演练</a> · 演练时段 21:40—22:10，出口只出不进</span></li>
+      <li><span class="date">11月5日</span><span class="t"><a href="/#guide">市中心跨年活动分区预约开放</a> · 五个分区各有独立容量，预约页显示剩余名额</span></li>
+      <li><span class="date">11月3日</span><span class="t"><a href="/#talks">浦东一商场限量发售改为线上抽签</a> · 取消现场排队，取货分时段进场</span></li>
+      <li><span class="date">10月30日</span><span class="t"><a href="/#deep">某音乐节增配台侧疏散通道</a> · 通道宽度从2.4米拓至4米，可双向开启</span></li>
+      <li><span class="date">10月26日</span><span class="t"><a href="/#cats">校园运动会入场改为分级放行</a> · 按看台分区错峰15分钟</span></li>
+    </ul>
+  </section>
+
+  <!-- 4 分类入口 -->
+  <section class="block" id="cats" aria-labelledby="h-cats">
+    <h2 id="h-cats"><span class="num">04</span>分类入口：按场景与风险环节找</h2>
+    <p class="sec-note">括号内为站内已收录的案例与规则条目数。</p>
+    <div class="tagsindex">
+      <a href="/#deep">体育场入口限流<b>14</b></a>
+      <a href="/#deep">音乐节站区前排<b>9</b></a>
+      <a href="/#guide">地铁封站演练<b>7</b></a>
+      <a href="/#deep">巷道双向对冲<b>6</b></a>
+      <a href="/#guide">跨年活动分区预约<b>11</b></a>
+      <a href="/#cats">商场限量发售排队<b>5</b></a>
+      <a href="/#guide">校园运动会入场<b>4</b></a>
+      <a href="/#guide">天桥与地下通道<b>8</b></a>
+      <a href="/#deep">朝觐路线交叉口<b>3</b></a>
+      <a href="/#guide">站区护栏与疏散门<b>10</b></a>
+      <a href="/#faq">人群密度计数法<b>6</b></a>
+      <a href="/#faq">创伤性窒息识别<b>4</b></a>
+    </div>
+  </section>
+
+  <!-- 5 深度解析 -->
+  <section class="block deep" id="deep" aria-labelledby="h-deep">
+    <h2 id="h-deep"><span class="num">05</span>深度解析：限流阈值该定在 4 人/㎡ 还是 6 人/㎡</h2>
+    <p>先给判断：对露天、无固定座椅、带坡度的场地，把 4 人/㎡ 作为封闭入口的触发线是合理下限；对室内平面场地、有座椅分区、广播可覆盖全场的馆内活动，阈值放宽到 5 人/㎡ 仍有依据。按场地类型一刀切，是过去多起事故里被反复提到的管理漏洞。</p>
+
+    <h3>韩国梨泰院：巷道宽度与密度的对应</h3>
+    <p>2022年10月29日晚，梨泰院一条长而窄的斜坡巷道成为挤压最重的位置。首尔警方公开的现场勘验提到，巷道宽度约 3.2 米，坡道在交汇处形成下坡汇入上坡的地形。若按 4 人/㎡ 计算，3.2 米宽、40 米长的区段容量约 512 人；当晚该区段在不同时段被目击者估计为上千人。可核对的事实是：112 报警记录在挤压高峰前已出现多条求助；推断的部分是，坡道造成的“下坡加速”对压力的实际贡献值，目前没有公开测量数据。</p>
+
+    <h3>虹口体育馆：阈值写进票务页前后</h3>
+    <p>对比同一场馆两次演出的现场记录。10月中旬场次，站区入口只挂“有序入场”提示牌，安保靠目测判断，开场前15分钟A2口外出现停滞，一名观众扭伤脚踝。11月7日场次，票务页直接写明站区限流阈值 4 人/㎡，安保按计数法每 3 分钟测一次，达到 4.6 人/㎡ 时关闭单口、启用B通道。结果：退场单口通过量从每分钟 210 人提高到 340 人，现场广播平均响应时间缩短到 40 秒内。规则差异就在“可量化”这一步。</p>
+
+    <h3>麦加米纳：交叉口改造的规则前后</h3>
+    <p>2015年9月24日的挤压发生在两条朝觐路线交叉口。事后沙特方面公布的整改包括：交叉口改为单向循环、增设天桥、把部分路线时段错开。这里的判断可以拆成可核对结构：改造前——双向人流在同一平面交汇；改造后——立体分层、单向流动；可验证指标——同一时段的单位时间通过人数与踩踏报警数量。需要说清的是，整改成效的具体统计数字公开有限，转述时应标明来源层级。</p>
+
+    <h3>争议与说法差异</h3>
+    <p>有人主张把阈值统一压到 3 人/㎡，理由是 3 人/㎡ 时个体已开始相互碰触。这个说法有依据，但对大型露天活动而言，3 人/㎡ 会使多数检票口的通行效率下降一半以上，主办方往往据此拒绝执行。另一种相反意见认为 6 人/㎡ 才需要干预，依据是健身房和集会现场的观察。反驳点在于：观察样本缺少密度测量，且未区分有座椅与无座椅场地。把这些说法并列时，事实层是密度数值，回应层是主办方与监管的解释，推测层是对阈值放宽后风险的估计。</p>
+
+    <div class="quote">
+      “现场广播延迟 90 秒，人群就多走二十步。”——某场馆安保主管在11月7日复盘会上的说法。
+      <cite>转述，非正式记录，供参考</cite>
+    </div>
+
+    <h3>可用的一张对照表</h3>
+    <div class="vs">
+      <div>
+        <h4>4 人/㎡ 触发</h4>
+        <ul>
+          <li>露天、无座椅、带坡度</li>
+          <li>站区前排、音乐节</li>
+          <li>单向通道仅一条</li>
+          <li>广播覆盖不全</li>
+        </ul>
+      </div>
+      <div>
+        <h4>5 人/㎡ 触发</h4>
+        <ul>
+          <li>室内平面、有固定座椅</li>
+          <li>看台分区、检票口多</li>
+          <li>双向通道、疏散门充足</li>
+          <li>全场广播与屏显</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:12px">这张表可以反驳的地方在于：室内平面场地一旦出现断电、火警等次生事件，5 人/㎡ 的容忍值就失效。阈值应当绑定“有没有次生风险源”，而不是只绑定建筑类型。</p>
+  </section>
+
+  <!-- 6 体验指南 -->
+  <section class="block" id="guide" aria-labelledby="h-guide">
+    <h2 id="h-guide"><span class="num">06</span>体验指南：从入场到退场的六个动作</h2>
+    <p class="sec-note">顺序按时间排列，前两步在进场前完成。</p>
+    <ol class="steps">
+      <li><b>先看分区容量。</b>票务页若写明站区限流阈值（如 4 人/㎡），记住入场时段与最近出口编号，别只记座位号。</li>
+      <li><b>入场走外侧。</b>靠近护栏、立柱的一侧通常压力小；正对闸机中线的一侧最容易被后方推挤。</li>
+      <li><b>留一只脚可动。</b>站定后与前后保持约一臂距离，重心略前，防止被突然的推力掀倒。</li>
+      <li><b>听广播报出口。</b>退场广播若只报“请有序离场”而不报具体出口，主动向安保询问最近的双向门。</li>
+      <li><b>顺流斜切。</b>人群移动时朝边缘斜向靠近固定物，不要原地停步，也不要逆流硬挤。</li>
+      <li><b>倒地侧卧护颈。</b>侧卧、蜷缩、双手护后颈，背部朝向推进方向，寻找台阶侧壁或护栏立柱。</li>
+    </ol>
+    <p style="margin-top:12px">补充一点常被忽略的：穿硬底鞋在斜坡队列里更容易被踩掉，散场时段最好换成贴脚、有后跟的鞋。这条来自 11 月 7 日退场时三名观众的反馈，属经验性建议。</p>
+  </section>
+
+  <!-- 7 榜单 -->
+  <section class="block" id="rank" aria-labelledby="h-rank">
+    <h2 id="h-rank"><span class="num">07</span>可信度分层：五条说法的证据等级</h2>
+    <div class="vs">
+      <div>
+        <h4>高：有官方文件或测量</h4>
+        <ul>
+          <li>外滩2014年事件的官方调查报告</li>
+          <li>梨泰院112报警记录</li>
+          <li>虹口体育馆11月7日计数记录</li>
+        </ul>
+      </div>
+      <div>
+        <h4>中低：目击转述与推测</h4>
+        <ul>
+          <li>坡道加速对压力的贡献值</li>
+          <li>“阈值放宽后不会出事”的主办方判断</li>
+          <li>对整改成效的整体评估</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 FAQ -->
+  <section class="block" id="faq" aria-labelledby="h-faq">
+    <h2 id="h-faq"><span class="num">08</span>常见问题</h2>
+    <details class="faq">
+      <summary>人群密度到多少会开始出现踩踏风险？</summary>
+      <p>按英国 HSE 的通行分级，每平方米超过 4 人时个体已难以自主选择行走方向，超过 6 人时胸腔受挤压、呼吸受限。4 人/㎡ 通常作为需立即限流的警戒线，但要结合坡度、通道数量和广播覆盖再定。</p>
+    </details>
+    <details class="faq">
+      <summary>踩踏中倒地后应该怎么保护自己？</summary>
+      <p>侧卧蜷缩、双手护住后颈与头部、双膝收向胸口，尽量让背部朝向人流推进方向，减少胸腔被直接压迫；同时寻找护栏立柱、台阶侧壁等可攀附的固定物，等压力稍缓再起身。</p>
+    </details>
+    <details class="faq">
+      <summary>演唱会站区前排为什么比看台更危险？</summary>
+      <p>站区没有固定座椅分隔，人群密度随演出高潮短时间上升，退场时同一通道被双向使用；看台有阶梯和座椅形成物理阻隔，密度峰值通常低于站区。11月7日虹口场次的记录显示站区前排比看台高出约 1.8 人/㎡。</p>
+    </details>
+    <details class="faq">
+      <summary>遇到人群对冲时逆流退回是否可行？</summary>
+      <p>密度低于 3 人/㎡ 时可以小步侧移退出；密度更高时逆流会制造新的对冲面。更稳妥的做法是顺流斜向移动，靠近边缘的固定物再脱离主流动线。</p>
+    </details>
+    <details class="faq">
+      <summary>大型活动限流通知一般提前多久发布？</summary>
+      <p>国内多数场馆在开票后随票务页公布分区容量，临时限流则通过主办方微博、场馆广播在开场前 1 至 2 小时发布。11月7日虹口场次是在开场前 18 分钟广播首次限流。</p>
+    </details>
+    <details class="faq">
+      <summary>人流里被推着走时该往哪看？</summary>
+      <p>视线放远，看前方 5 到 10 米的通道变化与地面高差，不要盯着手机或同伴后脑。地槛、排水沟盖板、台阶边缘是最容易形成绊点的位置。</p>
+    </details>
+  </section>
+
+  <!-- 9 观众留言 -->
+  <section class="block" id="talks" aria-labelledby="h-talks">
+    <h2 id="h-talks"><span class="num">09</span>观众留言：现场的人怎么说</h2>
+    <p class="sec-note">按时间排列，允许保留不同语气。</p>
+    <div class="cmts">
+      <div class="cmt">
+        <div class="who"><b>@斜阳路</b><span>11月7日 22:14</span></div>
+        <p>虹口退场那会儿三向分流确实快，但 A2 口关闭前十分钟已经把我和前面两个人挤得脚跟离地。广播倒是快，40 秒内就报了 B 口。</p>
+      </div>
+      <div class="cmt">
+        <div class="who"><b>@小满</b><span>11月6日 20:02</span></div>
+        <p>人民广场封站演练，B 口只出不进，我绕了三百米。演练本身没毛病，就是标识牌只挂了两块，后面的人都在问。</p>
+      </div>
+      <div class="cmt">
+        <div class="who"><b>@阿棠</b><span>11月5日 18:47</span></div>
+        <p>把阈值 4 人/㎡ 写进票务页这条比什么口号都实在。至少买票的时候就知道站区会限流，不会进场被关门挡在外面还一头雾水。</p>
+      </div>
+      <div class="cmt">
+        <div class="who"><b>@叶下</b><span>11月3日 11:30</span></div>
+        <p>商场限量发售改线上抽签，我举双手赞成。上次排队从负一层绕到一层，队伍中间还有人在推，那才是真危险。</p>
+      </div>
+      <div class="cmt">
+        <div class="who"><b>@老许</b><span>10月30日 09:12</span></div>
+        <p>音乐节台侧通道从 2.4 米拓到 4 米，听着挺好，但现场只开了单侧门，双向变单向。设计图和执行还是两回事。</p>
+      </div>
+      <div class="cmt">
+        <div class="who"><b>@二两</b><span>10月26日 15:55</span></div>
+        <p>我认为 4 人/㎡ 这个数有点紧，室内看台演出也按这个标准，检票口排队得排到马路对面去。场馆类型不同，阈值该分。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 相关资讯 -->
+  <section class="block" id="news" aria-labelledby="h-news">
+    <h2 id="h-news"><span class="num">10</span>相关资讯：规则与演练动态</h2>
+    <div class="grid g2">
+      <article class="card">
+        <h3>跨年活动五个分区独立容量</h3>
+        <p>预约页按分区显示剩余名额，单区满额即关闭入口，退场按分区错峰 10 分钟。</p>
+        <span class="meta">11月5日 · 预约规则</span>
+      </article>
+      <article class="card">
+        <h3>地铁站晚间封站演练</h3>
+        <p>人民广场站 B 口演练时段 21:40—22:10，只出不进，地面加派引导员四人。</p>
+        <span class="meta">11月6日 · 交通公告</span>
+      </article>
+      <article class="card">
+        <h3>校园运动会分级放行</h3>
+        <p>按看台分区错峰 15 分钟入场，每个入口配两名教师值守，禁止跨区穿行。</p>
+        <span class="meta">10月26日 · 校内通知</span>
+      </article>
+      <article class="card">
+        <h3>站区护栏与疏散门检查</h3>
+        <p>本周对三处场馆的护栏紧固件与疏散门开合做抽查，发现一处门轴锈滞，已整改。</p>
+        <span class="meta">11月7日 · 检查记录</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- 11 相关推荐 -->
+  <section class="block" id="recs" aria-labelledby="h-recs">
+    <h2 id="h-recs"><span class="num">11</span>相关推荐：按关键词直达</h2>
+    <div class="tagsindex">
+      <a href="/#deep">人群密度计数法实操</a>
+      <a href="/#guide">站区护栏与疏散门</a>
+      <a href="/#deep">巷道双向对冲案例</a>
+      <a href="/#faq">创伤性窒息识别</a>
+      <a href="/#cats">体育场入口限流</a>
+      <a href="/#guide">跨年活动分区预约</a>
+      <a href="/#guide">地铁封站演练</a>
+      <a href="/#cats">商场限量发售排队</a>
+    </div>
+  </section>
+
+</main>
+
+<aside aria-label="辅助导航与时间线">
+  <div class="panel">
+    <h2>本页栏目</h2>
+    <nav id="sideNav" aria-label="页内导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#picks">精选内容</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#cats">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#rank">可信度分层</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#talks">观众留言</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#recs">相关推荐</a>
+    </nav>
+  </div>
+  <div class="panel">
+    <h2>10月—11月时间线</h2>
+    <ul class="timeline">
+      <li><b>11月7日</b>虹口站区限流阈值写入票务页</li>
+      <li><b>11月6日</b>人民广场站B口封站演练</li>
+      <li><b>11月5日</b>跨年活动五分区容量开放</li>
+      <li><b>11月3日</b>商场限量发售改线上抽签</li>
+      <li><b>10月30日</b>音乐节台侧通道拓宽</li>
+      <li><b>10月26日</b>校园运动会分级放行</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2>快速入口</h2>
+    <ul>
+      <li><a href="/#deep">4 人/㎡ 与 5 人/㎡ 之争</a></li>
+      <li><a href="/#guide">倒地护颈六步</a></li>
+      <li><a href="/#faq">限流通知何时发布</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<footer class="sitefoot">
+  <div class="footgrid">
+    <div>
+      <div class="footbrand">
+        <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#f0a63c"/>
+          <path d="M12 44 L24 24 L34 40 L44 20 L54 44" fill="none" stroke="#1a2a3a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        踩踏
+      </div>
+      <p class="local">把挤压伤亡拆成密度、通道和规则三件事，逐条对照现场记录。</p>
+    </div>
+    <div>
+      <h3>内容</h3>
+      <a href="/#overview">领域概览</a>
+      <a href="/#picks">精选内容</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+    </div>
+    <div>
+      <h3>互动</h3>
+      <a href="/#faq">常见问题</a>
+      <a href="/#talks">观众留言</a>
+      <a href="/#rank">可信度分层</a>
+      <a href="/#recs">相关推荐</a>
+    </div>
+    <div>
+      <h3>更新与说明</h3>
+      <a href="/#latest">最新更新</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#cats">分类入口</a>
+    </div>
+  </div>
+  <div class="copyright">
+    <span>© 2026 踩踏观察台 · 案例、密度与规则条目均为示例整理，具体以主办方公告与官方调查为准。</span>
+    <span>页面更新：11月7日 22:30，对应“虹口体育馆限流阈值”与“站区护栏检查”两项。</span>
+  </div>
+</footer>
+
+<button id="toTop" type="button" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  var q=document.getElementById('q'),
+      btn=document.getElementById('qbtn'),
+      msg=document.getElementById('searchMsg'),
+      menuBtn=document.getElementById('menuBtn'),
+      nav=document.getElementById('mainnav'),
+      toTop=document.getElementById('toTop'),
+      sideLinks=Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+
+  function runSearch(){
+    var kw=(q.value||'').trim().toLowerCase();
+    if(!kw){msg.textContent='请输入案例名、规则或关键词，例如“4人/㎡”“梨泰院”。';return;}
+    var blocks=Array.prototype.slice.call(document.querySelectorAll('main section'));
+    var hits=[];
+    blocks.forEach(function(b){
+      if(b.textContent.toLowerCase().indexOf(kw)>-1) hits.push(b);
+    });
+    if(hits.length){
+      msg.textContent='找到 '+hits.length+' 个相关板块：'+hits.map(function(b){
+        var h=b.querySelector('h2');
+        return h?h.textContent.replace(/^\s*\d+\s*/,''):b.id;
+      }).join('、');
+      hits[0].scrollIntoView({behavior:'smooth',block:'start'});
+    }else{
+      msg.textContent='没有匹配“'+q.value.trim()+'”的内容，试试“密度”“限流”“退场”或“护栏”。';
+    }
+  }
+  btn.addEventListener('click',runSearch);
+  q.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();runSearch();}});
+
+  menuBtn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A' && window.innerWidth<=900){
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+  });
+
+  function onScroll(){
+    if(window.scrollY>420){toTop.classList.add('show');}else{toTop.classList.remove('show');}
+    var pos=window.scrollY+130,cur=null;
+    sideLinks.forEach(function(a){
+      var id=a.getAttribute('href').replace('/#',''),
+          el=document.getElementById(id);
+      if(el&&el.offsetTop<=pos) cur=a;
+    });
+    sideLinks.forEach(function(a){a.classList.toggle('hl',a===cur);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
